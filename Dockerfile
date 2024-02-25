@@ -1,7 +1,5 @@
-# Start from the latest Golang base image
-FROM golang:latest
+FROM golang:alpine
 
-# Add Maintainer Info
 LABEL maintainer="Your Name <youremail@example.com>"
 
 # Set the Current Working Directory inside the container
