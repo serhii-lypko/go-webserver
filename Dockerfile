@@ -1,6 +1,5 @@
-FROM golang:alpine
+FROM golang:latest
 
-LABEL maintainer="Your Name <youremail@example.com>"
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
