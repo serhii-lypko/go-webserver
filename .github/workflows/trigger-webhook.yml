@@ -1,0 +1,18 @@
+name: Trigger Webhook
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  webhook:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Webhook
+        uses: distributhor/workflow-webhook@v1
+        env:
+          webhook_type: 'json-extended'
+          webhook_url: 'http://13.38.80.244:9000/hooks/redeploy-webhook'
+          webhook_secret: ${{ secrets.WEBHOOK_DEPLOY_SECRET }}
