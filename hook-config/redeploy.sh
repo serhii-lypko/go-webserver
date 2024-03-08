@@ -8,3 +8,4 @@ docker rm go-webserver || true
 docker run -d --name go-webserver -p 8080:8080 serhiilk/go-webserver:latest
 
 echo 'Web-server redeploy completed'
+
