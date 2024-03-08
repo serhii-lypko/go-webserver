@@ -23,3 +23,15 @@ jobs:
         context: .
         push: true
         tags: serhiilk/go-webserver:latest
+
+    - name: Deploy to EC2
+      env:
+        SSH_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      run: |
+        echo "$SSH_KEY" > ec2_key.pem
+        chmod 600 ec2_key.pem
+        ssh -o StrictHostKeyChecking=no -i ec2_key.pem ubuntu@ec2-13-38-80-244.eu-west-3.compute.amazonaws.com << 'EOF'
+          cd /home/ubuntu/projects/web-server
+          bash redeploy.sh
+        EOF
+        rm -f ec2_key.pem
